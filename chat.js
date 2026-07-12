@@ -51,7 +51,8 @@
     if (!navigator.geolocation) { notice.innerHTML = '<strong>Location is not available in this browser.</strong><br>Please open the live HTTPS website or enter your city and address manually.'; return; }
     notice.innerHTML = '<strong>Checking your distance…</strong><br>Please allow location access when asked. We use it only to check your booking distance.';
     navigator.geolocation.getCurrentPosition(position => {
-      const base = { lat: 34.094636, lng: -118.098469 };
+      // Private service-center coordinate. The public site never displays an address.
+      const base = { lat: 34.114926, lng: -118.081258 };
       const radians = value => value * Math.PI / 180;
       const lat1 = radians(position.coords.latitude), lat2 = radians(base.lat);
       const dLat = radians(base.lat - position.coords.latitude), dLng = radians(base.lng - position.coords.longitude);
