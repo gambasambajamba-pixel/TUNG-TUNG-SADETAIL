@@ -82,7 +82,7 @@
     }, error => {
       const message = error.code === 1 ? 'Location permission was blocked. Allow location in your browser settings and try again.' : error.code === 3 ? 'Location check timed out. Please try again where you have a stronger signal.' : 'We could not read your location. Please try again.';
       notice.innerHTML = '<strong>Location check did not finish.</strong><br>' + message + '<br><br>Note: browser location works on a live HTTPS website. Local file previews can block it.';
-    }, { enableHighAccuracy: true, timeout: 15000, maximumAge: 60000 });
+    }, { enableHighAccuracy: true, timeout: 30000, maximumAge: 0 });
   });
   if (bookingForm) bookingForm.addEventListener('submit', event => {
     event.preventDefault();
