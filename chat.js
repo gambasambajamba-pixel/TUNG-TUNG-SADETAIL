@@ -43,7 +43,7 @@
   if (aboutCopy) aboutCopy.textContent = 'We can detail at your driveway or at our location. At 15 miles or farther, exterior-only and interior-only bookings are upgraded to the complete interior, exterior, and wet-vac package. Please provide access to water at the service location. Most appointments take around 2–3+ hours, depending on vehicle size and condition.';
   if (bookingForm) {
     const bookingButton = bookingForm.querySelector('button[type="submit"]');
-    if (bookingButton) bookingButton.insertAdjacentHTML('beforebegin', '<div class="field"><label>Service distance</label><input id="travelZone" type="hidden"><button class="tt-range-btn" id="locationCheck" type="button">Use my precise location to check</button></div><div class="field"><label for="serviceArea">City</label><input id="serviceArea" required placeholder="Autofills after location check"></div><div class="field full"><label for="serviceAddress">Exact service address</label><input id="serviceAddress" required placeholder="Enter the exact driveway or service address"></div><div class="field full"><div class="tt-distance" id="distanceNotice"><span class="tt-range-dot">15<br>mi</span><strong>15-mile service range</strong><br>Tap “Use my precise location” and we will check your live GPS distance from our service center. Then enter the exact service address for your appointment. Your address is never shown publicly.</div></div>');
+    if (bookingButton) bookingButton.insertAdjacentHTML('beforebegin', '<div class="field"><label>Service distance</label><input id="travelZone" type="hidden"><button class="tt-range-btn" id="locationCheck" type="button">Use my precise location to check</button></div><div class="field"><label for="serviceArea">City</label><input id="serviceArea" required placeholder="Autofills after location check"></div><div class="field full"><label for="serviceAddress">Exact service address</label><input id="serviceAddress" required placeholder="Enter the exact driveway or service address"><button class="tt-range-btn" id="addressCheck" type="button">Check my exact address</button></div><div class="field full"><div class="tt-distance" id="distanceNotice"><span class="tt-range-dot">15<br>mi</span><strong>15-mile service range</strong><br>Use precise phone location or enter your driveway address and tap “Check my exact address.” Your address is never shown publicly.</div></div>');
   }
   const locationCheck = document.getElementById('locationCheck');
   if (locationCheck) locationCheck.addEventListener('click', () => {
@@ -81,6 +81,30 @@
       const message = error.code === 1 ? 'Location permission was blocked. Allow location in your browser settings and try again.' : error.code === 3 ? 'Location check timed out. Please try again where you have a stronger signal.' : 'We could not read your location. Please try again.';
       notice.innerHTML = '<strong>Location check did not finish.</strong><br>' + message + '<br><br>Note: browser location works on a live HTTPS website. Local file previews can block it.';
     }, { enableHighAccuracy: true, timeout: 30000, maximumAge: 0 });
+  });
+  const addressCheck = document.getElementById('addressCheck');
+  if (addressCheck) addressCheck.addEventListener('click', async () => {
+    const addressInput = document.getElementById('serviceAddress');
+    const cityInput = document.getElementById('serviceArea');
+    const notice = document.getElementById('distanceNotice');
+    const zone = document.getElementById('travelZone');
+    const service = document.getElementById('service');
+    if (!addressInput.value.trim()) { notice.innerHTML = '<strong>Enter your driveway or service address first.</strong><br>Then tap “Check my exact address.”'; addressInput.focus(); return; }
+    notice.innerHTML = '<strong>Checking your exact address…</strong><br>Your address is used only for this booking distance check.';
+    try {
+      const query = addressInput.value + ', ' + (cityInput.value || 'San Gabriel') + ', CA';
+      const response = await fetch('https://nominatim.openstreetmap.org/search?format=jsonv2&limit=1&q=' + encodeURIComponent(query));
+      const result = await response.json();
+      if (!result.length) throw new Error('not found');
+      const base = { lat: 34.114926, lng: -118.081258 };
+      const lat = Number(result[0].lat), lng = Number(result[0].lon), radians = value => value * Math.PI / 180;
+      const dLat = radians(base.lat - lat), dLng = radians(base.lng - lng);
+      const a = Math.sin(dLat / 2) ** 2 + Math.cos(radians(lat)) * Math.cos(radians(base.lat)) * Math.sin(dLng / 2) ** 2;
+      const miles = 3958.8 * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+      notice.dataset.miles = miles.toFixed(1);
+      if (miles >= 15) { const over = (miles - 15).toFixed(1); zone.value = 'outside'; service.value = 'Wet Vac + Full Detail — $130+'; notice.classList.add('outside'); notice.innerHTML = '<span class="tt-range-dot">+' + over + '<br>mi</span><strong>Your exact address is ' + over + ' miles beyond the 15-mile limit.</strong><br>It is ' + miles.toFixed(1) + ' miles from our service center, so the complete package has been selected.'; }
+      else { const inside = (15 - miles).toFixed(1); zone.value = 'within'; notice.classList.remove('outside'); notice.innerHTML = '<span class="tt-range-dot">' + inside + '<br>mi</span><strong>Your exact address is ' + inside + ' miles inside the 15-mile limit.</strong><br>It is ' + miles.toFixed(1) + ' miles from our service center. Your selected package is available.'; }
+    } catch (_) { notice.innerHTML = '<strong>We could not verify that address.</strong><br>Check the street number, city, and ZIP code, or use your precise phone location instead.'; }
   });
   if (bookingForm) bookingForm.addEventListener('submit', event => {
     event.preventDefault();
