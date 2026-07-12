@@ -43,7 +43,7 @@
   if (aboutCopy) aboutCopy.textContent = 'We can detail at your driveway or at our location. At 15 miles or farther, exterior-only and interior-only bookings are upgraded to the complete interior, exterior, and wet-vac package. Please provide access to water at the service location. Most appointments take around 2–3+ hours, depending on vehicle size and condition.';
   if (bookingForm) {
     const bookingButton = bookingForm.querySelector('button[type="submit"]');
-    if (bookingButton) bookingButton.insertAdjacentHTML('beforebegin', '<div class="field"><label>Service distance</label><input id="travelZone" type="hidden"><button class="tt-range-btn" id="locationCheck" type="button">Use my location to check</button></div><div class="field"><label for="serviceArea">City</label><input id="serviceArea" required placeholder="Autofills after location check"></div><div class="field full"><label for="serviceAddress">Service address</label><input id="serviceAddress" required placeholder="Autofills after location check, then you can edit it"></div><div class="field full"><div class="tt-distance" id="distanceNotice"><span class="tt-range-dot">15<br>mi</span><strong>15-mile service range</strong><br>Tap “Use my location” and we will automatically check your distance from our service center. Your address is never shown publicly.</div></div>');
+    if (bookingButton) bookingButton.insertAdjacentHTML('beforebegin', '<div class="field"><label>Service distance</label><input id="travelZone" type="hidden"><button class="tt-range-btn" id="locationCheck" type="button">Use my precise location to check</button></div><div class="field"><label for="serviceArea">City</label><input id="serviceArea" required placeholder="Autofills after location check"></div><div class="field full"><label for="serviceAddress">Exact service address</label><input id="serviceAddress" required placeholder="Enter the exact driveway or service address"></div><div class="field full"><div class="tt-distance" id="distanceNotice"><span class="tt-range-dot">15<br>mi</span><strong>15-mile service range</strong><br>Tap “Use my precise location” and we will check your live GPS distance from our service center. Then enter the exact service address for your appointment. Your address is never shown publicly.</div></div>');
   }
   const locationCheck = document.getElementById('locationCheck');
   if (locationCheck) locationCheck.addEventListener('click', () => {
@@ -68,11 +68,8 @@
           const place = await response.json();
           const address = place.address || {};
           const city = address.city || address.town || address.village || address.hamlet || address.county || '';
-          const street = [address.house_number, address.road].filter(Boolean).join(' ');
           if (city) document.getElementById('serviceArea').value = city;
-          if (street) document.getElementById('serviceAddress').value = street;
         } catch (_) {
-          document.getElementById('serviceAddress').placeholder = 'Enter your address manually';
           document.getElementById('serviceArea').placeholder = 'Enter your city manually';
         }
       };
