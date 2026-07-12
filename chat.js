@@ -51,8 +51,8 @@
     if (!navigator.geolocation) { notice.innerHTML = '<strong>Location is not available in this browser.</strong><br>Please open the live HTTPS website or enter your city and address manually.'; return; }
     notice.innerHTML = '<strong>Checking your distance…</strong><br>Please allow location access when asked. We use it only to check your booking distance.';
     navigator.geolocation.getCurrentPosition(position => {
-      // Private service-center coordinate. The public site never displays an address.
-      const base = { lat: 34.114926, lng: -118.081258 };
+      // Public service-area center. A private exact origin requires a secure backend.
+      const base = { lat: 34.094636, lng: -118.098469 };
       const radians = value => value * Math.PI / 180;
       const lat1 = radians(position.coords.latitude), lat2 = radians(base.lat);
       const dLat = radians(base.lat - position.coords.latitude), dLng = radians(base.lng - position.coords.longitude);
@@ -96,7 +96,7 @@
       const response = await fetch('https://nominatim.openstreetmap.org/search?format=jsonv2&limit=1&q=' + encodeURIComponent(query));
       const result = await response.json();
       if (!result.length) throw new Error('not found');
-      const base = { lat: 34.114926, lng: -118.081258 };
+      const base = { lat: 34.094636, lng: -118.098469 };
       const lat = Number(result[0].lat), lng = Number(result[0].lon), radians = value => value * Math.PI / 180;
       const dLat = radians(base.lat - lat), dLng = radians(base.lng - lng);
       const a = Math.sin(dLat / 2) ** 2 + Math.cos(radians(lat)) * Math.cos(radians(base.lat)) * Math.sin(dLng / 2) ** 2;
