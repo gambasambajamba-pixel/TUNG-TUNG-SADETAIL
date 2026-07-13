@@ -21,7 +21,8 @@
   document.head.insertAdjacentHTML('beforeend', `<style>${style}</style>`);
   document.head.insertAdjacentHTML('beforeend', `<style>
     .tt-wheel i{left:50%!important;top:50%!important;bottom:auto!important;right:auto!important;width:64px!important;transform:translate(-50%,-50%) rotate(var(--wheel-angle)) translateY(-76px)!important;transform-origin:center;}
-    .tt-wheel i:nth-of-type(1){--wheel-angle:30deg}.tt-wheel i:nth-of-type(2){--wheel-angle:90deg}.tt-wheel i:nth-of-type(3){--wheel-angle:150deg}.tt-wheel i:nth-of-type(4){--wheel-angle:210deg}.tt-wheel i:nth-of-type(5){--wheel-angle:270deg}.tt-wheel i:nth-of-type(6){--wheel-angle:330deg}
+    .tt-wheel{background:conic-gradient(#ff9d42 0 20deg,#1477ff 20deg 70deg,#8fc2ff 70deg 120deg,#406ca9 120deg 200deg,#dceeff 200deg 280deg,#fff 280deg 360deg)!important}
+    .tt-wheel i:nth-of-type(1){--wheel-angle:10deg;font-size:6px}.tt-wheel i:nth-of-type(2){--wheel-angle:45deg}.tt-wheel i:nth-of-type(3){--wheel-angle:95deg}.tt-wheel i:nth-of-type(4){--wheel-angle:160deg}.tt-wheel i:nth-of-type(5){--wheel-angle:240deg}.tt-wheel i:nth-of-type(6){--wheel-angle:320deg}
   </style>`);
   const rangeBanner = '<section class="tt-range-banner"><div class="tt-range-wrap"><div><b>15-mile service range</b><p>Tap “Check my distance” when booking. Under 15 miles, you can choose any service. At 15 miles or farther, one-service bookings such as exterior-only or interior-only are upgraded to the complete interior, exterior, and wet-vac package. Your address is never shown.</p></div><a href="#booking">Check my distance</a></div></section>';
   const hero = document.querySelector('.hero');
@@ -31,7 +32,7 @@
   if (footer) footer.insertAdjacentHTML('beforebegin', rangeBanner);
   if (heroCopy) heroCopy.insertAdjacentHTML('beforeend', '<a class="tt-insta-hero" target="_blank" rel="noreferrer" href="https://www.instagram.com/tungtungsadetail/">Follow @tungtungsadetail ↗</a>');
   const services = document.getElementById('services');
-  if (services) services.insertAdjacentHTML('beforebegin', '<section class="tt-spin" id="spin"><div class="tt-spin-inner"><div><div class="eyebrow" style="color:#8fc2ff">Tung Tung rewards</div><h2>Spin for a detail reward. 🎉</h2><p>One lucky space wins a <b>free wet vac</b>, two spaces win <b>10% off</b>, and the rest win <b>5% off</b>. Sign up once with your email or number.</p><form class="tt-spin-form" id="tt-spin-form"><input id="tt-spin-contact" required autocomplete="email" placeholder="Email or mobile number"><button type="submit">Unlock one spin 🎡</button></form><p class="tt-spin-note">Your entry goes to Tung Tung SA Detail. One spin per browser.</p></div><div class="tt-wheel" id="tt-wheel" aria-label="Reward wheel"><i>FREE<br>WET VAC</i><i>10% OFF</i><i>5% OFF</i><i>5% OFF</i><i>5% OFF</i><i>10% OFF</i><span>SPIN<br>TO WIN</span></div></div></section>');
+  if (services) services.insertAdjacentHTML('beforebegin', '<section class="tt-spin" id="spin"><div class="tt-spin-inner"><div><div class="eyebrow" style="color:#8fc2ff">Tung Tung rewards</div><h2>Spin for a detail reward. 🎉</h2><p>The smallest, rarest space wins a <b>Free Wet Vac Service</b>. Two spaces win <b>10% off</b>, and the common spaces win <b>5% off</b>. Sign up once with your email or number.</p><form class="tt-spin-form" id="tt-spin-form"><input id="tt-spin-contact" required autocomplete="email" placeholder="Email or mobile number"><button type="submit">Unlock one spin 🎡</button></form><p class="tt-spin-note">Your entry goes to Tung Tung SA Detail. One spin per browser.</p></div><div class="tt-wheel" id="tt-wheel" aria-label="Reward wheel"><i>FREE WET<br>VAC SERVICE</i><i>10% OFF</i><i>10% OFF</i><i>5% OFF</i><i>5% OFF</i><i>5% OFF</i><span>SPIN<br>TO WIN</span></div></div></section>');
   const footerLocation = document.querySelector('.contact-strip span');
   if (footerLocation) footerLocation.textContent = '© 2026 Tung Tung SA Detail · 626 area';
   document.body.insertAdjacentHTML('beforeend', `<aside id="tt-chat" aria-label="Tung AI"><div id="tt-chat-box"><div class="tt-head"><b>Tung AI</b><span>Friendly answers about services and booking</span></div><div class="tt-messages" id="tt-messages"><div class="tt-msg">Hi! I am here to make booking easy and help your car look its best. Ask me anything about our services!</div></div><form class="tt-form" id="tt-form"><input id="tt-input" aria-label="Ask Tung AI a question" placeholder="Ask Tung AI anything"><button type="submit">Send</button></form><div class="tt-note">For a quote, text a car photo to 626-561-7482.</div></div><button id="tt-chat-toggle" type="button">Chat with Tung AI</button></aside>`);
@@ -47,7 +48,7 @@
     const contact = document.getElementById('tt-spin-contact').value.trim();
     if (localStorage.getItem('ttSpinUsed')) { alert('This browser has already used its one spin. Thanks for joining Tung Tung rewards!'); return; }
     localStorage.setItem('ttSpinUsed', 'true');
-    const rewards = ['FREE WET VAC', '10% OFF', '10% OFF', '5% OFF', '5% OFF', '5% OFF'];
+    const rewards = ['FREE WET VAC SERVICE', '10% OFF', '10% OFF', '10% OFF', '10% OFF', '10% OFF', '5% OFF', '5% OFF', '5% OFF', '5% OFF', '5% OFF', '5% OFF', '5% OFF', '5% OFF', '5% OFF', '5% OFF', '5% OFF', '5% OFF'];
     const reward = rewards[Math.floor(Math.random() * rewards.length)];
     saveToSheets({ type: 'wheel', contact, reward });
     spinWheel.classList.add('spinning');
@@ -184,7 +185,8 @@
       try { return `That is ${Function(`"use strict"; return (${math})`)()}. Happy to help!`; } catch (_) { return 'I can help with simple math, pricing, booking, and detailing questions.'; }
     }
     if (/^(hi|hello|hey|what'?s up|good morning|good afternoon)/.test(q)) return 'Hi! I am the Tung Tung SA Detail helper. I can help you choose a service, explain pricing, or get your booking started.';
-    if (/who are you|are you (an )?ai|what can you do|alex/.test(q)) return 'I’m Tung AI, Alex’s friendly Tung Tung SA Detail assistant! I can help with services, pricing, travel, timing, booking, and guiding you around the site.';
+    if (/creator|manager|owner|who runs|who made|alex/.test(q)) return 'Alex is the creator and manager of Tung Tung SA Detail! 🎉 I’m Tung AI, Alex’s friendly assistant, here to help you book and find what you need.';
+    if (/who are you|are you (an )?ai|what can you do/.test(q)) return 'I’m Tung AI, Alex’s friendly Tung Tung SA Detail assistant! I can help with services, pricing, travel, timing, booking, and guiding you around the site.';
     if (/thank|thanks/.test(q)) return 'You are welcome! When you are ready, use Book Now or text a photo of your car to 626-561-7482 for a quote.';
     if (/price|cost|how much|\$/.test(q)) return 'Exterior Wash starts at $40. Interior Detail starts at $70. Full Detail starts at $100. Wet Vac plus Full Detail starts at $130. Final quotes depend on vehicle size and condition.';
     if (/book|appointment|schedule|date|time/.test(q)) return 'Use the Book Now section to choose a service, date, and time. It opens a pre-filled text to 626-561-7482 so we can confirm your appointment.';
