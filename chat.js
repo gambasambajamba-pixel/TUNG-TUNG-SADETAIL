@@ -1,4 +1,11 @@
 (() => {
+  const googleWebAppUrl = 'https://script.google.com/macros/s/AKfycbzxaDXaQkBJl-Y_MlTivdF6U3CECG3YAeKTNWCU5AKXVBYK8bXoSlMqWQZLsIgVX3wK/exec';
+  const saveToSheets = data => fetch(googleWebAppUrl, {
+    method: 'POST',
+    mode: 'no-cors',
+    headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+    body: JSON.stringify(data)
+  }).catch(() => {});
   const style = `
     #tt-chat{position:fixed;right:18px;bottom:18px;z-index:30;font-family:Manrope,Arial,sans-serif}
     #tt-chat button{border:0;cursor:pointer;font:800 12px Manrope}
@@ -36,6 +43,7 @@
     const contact = document.getElementById('tt-spin-contact').value.trim();
     if (localStorage.getItem('ttSpinUsed')) { alert('This browser has already used its one spin. Thanks for joining Tung Tung rewards!'); return; }
     localStorage.setItem('ttSpinUsed', 'true');
+    saveToSheets({ type: 'wheel', contact, reward: 'Pending' });
     spinWheel.classList.add('spinning');
     const message = encodeURIComponent('Tung Tung SA Detail rewards sign-up\nContact: ' + contact + '\n\nPlease add me to the one-time spin list.');
     setTimeout(() => { window.location.href = 'sms:+16265617482?body=' + message; }, 500);
@@ -146,6 +154,7 @@
     }
     const text = encodeURIComponent('Thank you for booking with TUNGTUNGSADETAIL!\n\nNew booking request\nService: ' + service + '\nPreferred date: ' + date + '\nPreferred time: ' + time + '\nCustomer: ' + name + '\nContact: ' + contact + '\nDistance: ' + distance + ' miles (' + travelZone + ')\nCity: ' + serviceArea + '\nService address: ' + serviceAddress + '\n\nTravel note: Locations 15 miles or farther require the Wet Vac + Full Detail package.');
     const smsLink = 'sms:+16265617482?body=' + text;
+    saveToSheets({ type: 'booking', service, date, time, name, contact, city: serviceArea, address: serviceAddress, distance, travelRule: travelZone });
     window.location.href = smsLink;
     bookingForm.innerHTML = '<div class="full" style="text-align:center;padding:42px 8px;background:#eff8ff"><div class="eyebrow">Booking request ready</div><h3 style="font:700 35px Playfair Display,serif;letter-spacing:-.04em;margin:15px 0;color:#071429">THANK YOU FOR CHOOSING<br>TUNGTUNGSADETAIL</h3><p style="font-size:14px;line-height:1.7;max-width:420px;margin:0 auto 18px">Your text message is ready to send. Open Messages and tap Send to deliver the booking request.</p><a class="btn" style="display:inline-flex" href="' + smsLink + '">Send booking text</a></div>';
     const colors = ['#1477ff','#ff9d42','#dceeff','#ffffff','#87c3ff'];
