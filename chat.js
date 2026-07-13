@@ -20,6 +20,10 @@
   `;
   document.head.insertAdjacentHTML('beforeend', `<style>${style}</style>`);
   document.head.insertAdjacentHTML('beforeend', `<style>
+    .tt-insta-hero{background:linear-gradient(135deg,#ffb347,#f52b71 48%,#714bd9)!important;border:0!important;box-shadow:0 12px 25px rgba(245,43,113,.28);font-size:12px!important;padding:13px 16px!important}
+  </style>`);
+  document.head.insertAdjacentHTML('beforeend', '<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 64 64%27%3E%3Cdefs%3E%3ClinearGradient id=%27g%27 x1=%270%27 y1=%271%27 x2=%271%27 y2=%270%27%3E%3Cstop stop-color=%27%23ffb347%27/%3E%3Cstop offset=%27.5%27 stop-color=%27%23f52b71%27/%3E%3Cstop offset=%271%27 stop-color=%27%23714bd9%27/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width=%2764%27 height=%2764%27 rx=%2716%27 fill=%27url(%23g)%27/%3E%3Crect x=%2715%27 y=%2715%27 width=%2734%27 height=%2734%27 rx=%2710%27 fill=%27none%27 stroke=%27white%27 stroke-width=%274%27/%3E%3Ccircle cx=%2732%27 cy=%2732%27 r=%278%27 fill=%27none%27 stroke=%27white%27 stroke-width=%274%27/%3E%3Ccircle cx=%2743%27 cy=%2721%27 r=%273%27 fill=%27white%27/%3E%3C/svg%3E">');
+  document.head.insertAdjacentHTML('beforeend', `<style>
     .tt-wheel i{left:50%!important;top:50%!important;bottom:auto!important;right:auto!important;width:64px!important;transform:translate(-50%,-50%) rotate(var(--wheel-angle)) translateY(-76px)!important;transform-origin:center;}
     .tt-wheel{background:conic-gradient(#ff9d42 0 20deg,#8fc2ff 20deg 100deg,#1477ff 100deg 150deg,#406ca9 150deg 200deg,#dceeff 200deg 280deg,#fff 280deg 360deg)!important}
     .tt-wheel i:nth-of-type(1){--wheel-angle:10deg;font-size:6px}.tt-wheel i:nth-of-type(2){--wheel-angle:60deg}.tt-wheel i:nth-of-type(3){--wheel-angle:125deg}.tt-wheel i:nth-of-type(4){--wheel-angle:175deg}.tt-wheel i:nth-of-type(5){--wheel-angle:240deg}.tt-wheel i:nth-of-type(6){--wheel-angle:320deg}
@@ -30,7 +34,7 @@
   const heroCopy = document.querySelector('.hero-copy');
   if (hero) hero.insertAdjacentHTML('afterend', rangeBanner);
   if (footer) footer.insertAdjacentHTML('beforebegin', rangeBanner);
-  if (heroCopy) heroCopy.insertAdjacentHTML('beforeend', '<a class="tt-insta-hero" target="_blank" rel="noreferrer" href="https://www.instagram.com/tungtungsadetail/">Follow @tungtungsadetail ↗</a>');
+  if (heroCopy) heroCopy.insertAdjacentHTML('beforeend', '<a class="tt-insta-hero" target="_blank" rel="noreferrer" href="https://www.instagram.com/tungtungsadetail/">◎ &nbsp; Follow @tungtungsadetail ↗</a>');
   const services = document.getElementById('services');
   if (services) services.insertAdjacentHTML('beforebegin', '<section class="tt-spin" id="spin"><div class="tt-spin-inner"><div><div class="eyebrow" style="color:#8fc2ff">Tung Tung rewards</div><h2>Spin for a detail reward. 🎉</h2><p>The smallest, rarest space wins a <b>Free Wet Vac Service</b>. The <b>5% off</b> spaces sit next to it, while both <b>10% off</b> spaces are together at the bottom. Sign up once with your email or number.</p><form class="tt-spin-form" id="tt-spin-form"><input id="tt-spin-contact" required autocomplete="email" placeholder="Email or mobile number"><button type="submit">Unlock one spin 🎡</button></form><p class="tt-spin-note">Your entry goes to Tung Tung SA Detail. One spin per browser.</p></div><div class="tt-wheel" id="tt-wheel" aria-label="Reward wheel"><i>FREE WET<br>VAC SERVICE</i><i>5% OFF</i><i>10% OFF</i><i>10% OFF</i><i>5% OFF</i><i>5% OFF</i><span>SPIN<br>TO WIN</span></div></div></section>');
   const footerLocation = document.querySelector('.contact-strip span');
