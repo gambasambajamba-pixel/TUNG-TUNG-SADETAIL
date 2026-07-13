@@ -1,4 +1,4 @@
-const REVIEW_WEB_APP = 'https://script.google.com/macros/s/AKfycbzxaDXaQkBJl-Y_MlTivdF6U3CECG3YAeKTNWCU5AKXVBYK8bXoSlMqWQZLsIgVX3wK/exec';
+const REVIEW_WEB_APP = 'https://script.google.com/macros/s/AKfycbyFNfk06FSS8ZHvi2Hi0g7rXtaldavjlGph1RYhFcLu1SVzGwpQHJ5m_cNUhJOVye9aOQ/exec';
 
 const escapeHtml = value => String(value || '').replace(/[&<>'"]/g, char => ({ '&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;' }[char]));
 

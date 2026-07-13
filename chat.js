@@ -1,5 +1,5 @@
 (() => {
-  const googleWebAppUrl = 'https://script.google.com/macros/s/AKfycbzxaDXaQkBJl-Y_MlTivdF6U3CECG3YAeKTNWCU5AKXVBYK8bXoSlMqWQZLsIgVX3wK/exec';
+  const googleWebAppUrl = 'https://script.google.com/macros/s/AKfycbyFNfk06FSS8ZHvi2Hi0g7rXtaldavjlGph1RYhFcLu1SVzGwpQHJ5m_cNUhJOVye9aOQ/exec';
   const saveToSheets = data => fetch(googleWebAppUrl, {
     method: 'POST',
     mode: 'no-cors',
