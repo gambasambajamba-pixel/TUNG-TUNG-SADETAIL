@@ -76,13 +76,13 @@
   if (aboutCopy) aboutCopy.textContent = 'We can detail at your driveway or at our location. At 15 miles or farther, exterior-only and interior-only bookings are upgraded to the complete interior, exterior, and wet-vac package. Please provide access to water at the service location. Most appointments take around 2–3+ hours, depending on vehicle size and condition.';
   if (bookingForm) {
     const bookingButton = bookingForm.querySelector('button[type="submit"]');
-    if (bookingButton) bookingButton.insertAdjacentHTML('beforebegin', '<div class="field"><label>1. Your location</label><input id="travelZone" type="hidden"><button class="tt-range-btn" id="locationCheck" type="button">Use my phone location</button></div><div class="field"><label for="serviceArea">2. City</label><input id="serviceArea" required autocomplete="address-level2" placeholder="Autofills from your location"></div><div class="field full"><label for="serviceAddress">3. Driveway / service address</label><input id="serviceAddress" required autocomplete="street-address" placeholder="Autofills from your location — please check it"><button class="tt-range-btn" id="addressCheck" type="button">Confirm this exact address</button></div><div class="field full"><div class="tt-distance" id="distanceNotice"><span class="tt-range-dot">15<br>mi</span><strong>Three quick steps</strong><br>Use your phone location, check the auto-filled address, then request your appointment. Your address is never shown publicly.</div></div>');
+    if (bookingButton) bookingButton.insertAdjacentHTML('beforebegin', '<div class="field"><label>1. Find your city</label><input id="travelZone" type="hidden"><button class="tt-range-btn" id="locationCheck" type="button">Use my phone location to find city</button></div><div class="field"><label for="serviceArea">2. City</label><input id="serviceArea" required autocomplete="address-level2" placeholder="Autofills from your location"></div><div class="field full"><label for="serviceAddress">3. Exact service address</label><input id="serviceAddress" required autocomplete="street-address" placeholder="Type the exact driveway or service address"><button class="tt-range-btn" id="addressCheck" type="button">Check this exact address</button></div><div class="field full"><div class="tt-distance" id="distanceNotice"><span class="tt-range-dot">15<br>mi</span><strong>Three quick steps</strong><br>Use your phone location to find your city, then type the exact driveway or service address yourself. Your address is never shown publicly.</div></div>');
   }
   const locationCheck = document.getElementById('locationCheck');
   if (locationCheck) locationCheck.addEventListener('click', () => {
     const notice = document.getElementById('distanceNotice');
     if (!navigator.geolocation) { notice.innerHTML = '<strong>Location is not available in this browser.</strong><br>Please open the live HTTPS website or enter your city and address manually.'; return; }
-    notice.innerHTML = '<strong>Checking your distance…</strong><br>Please allow location access when asked. We use it only to check your booking distance.';
+    notice.innerHTML = '<strong>Finding your city and checking distance…</strong><br>Please allow location access when asked. You will type the exact service address yourself.';
     navigator.geolocation.getCurrentPosition(position => {
       // Public service-area center. A private exact origin requires a secure backend.
       const base = { lat: 34.094636, lng: -118.098469 };
@@ -102,17 +102,15 @@
           const place = await response.json();
           const address = place.address || {};
           const city = address.city || address.town || address.village || address.hamlet || address.county || '';
-          const street = [address.house_number, address.road].filter(Boolean).join(' ');
           if (city) document.getElementById('serviceArea').value = city;
-          if (street) document.getElementById('serviceAddress').value = street;
         } catch (_) {
           document.getElementById('serviceArea').placeholder = 'Enter your city manually';
         }
       };
       fillAddress();
       const accuracy = Math.round(position.coords.accuracy);
-      if (miles >= 15) { const over = (miles - 15).toFixed(1); zone.value = 'outside'; service.value = 'Wet Vac + Full Detail — $130+'; notice.classList.add('outside'); notice.innerHTML = '<span class="tt-range-dot">+' + over + '<br>mi</span><strong>You are ' + over + ' miles beyond the 15-mile limit.</strong><br>Your phone location is ' + miles.toFixed(1) + ' miles away (about ' + accuracy + ' meters accuracy). Check the auto-filled address, then confirm it below.'; }
-      else { const inside = (15 - miles).toFixed(1); zone.value = 'within'; notice.classList.remove('outside'); notice.innerHTML = '<span class="tt-range-dot">' + inside + '<br>mi</span><strong>You are ' + inside + ' miles inside the 15-mile limit.</strong><br>Your phone location is ' + miles.toFixed(1) + ' miles away (about ' + accuracy + ' meters accuracy). Check the auto-filled address, then confirm it below.'; }
+      if (miles >= 15) { const over = (miles - 15).toFixed(1); zone.value = 'outside'; service.value = 'Wet Vac + Full Detail — $130+'; notice.classList.add('outside'); notice.innerHTML = '<span class="tt-range-dot">+' + over + '<br>mi</span><strong>You are ' + over + ' miles beyond the 15-mile limit.</strong><br>Your city was found. Now type the exact driveway or service address and check it below.'; }
+      else { const inside = (15 - miles).toFixed(1); zone.value = 'within'; notice.classList.remove('outside'); notice.innerHTML = '<span class="tt-range-dot">' + inside + '<br>mi</span><strong>You are ' + inside + ' miles inside the 15-mile limit.</strong><br>Your city was found. Now type the exact driveway or service address and check it below.'; }
     }, error => {
       const message = error.code === 1 ? 'Location permission was blocked. Allow location in your browser settings and try again.' : error.code === 3 ? 'Location check timed out. Please try again where you have a stronger signal.' : 'We could not read your location. Please try again.';
       notice.innerHTML = '<strong>Location check did not finish.</strong><br>' + message + '<br><br>Note: browser location works on a live HTTPS website. Local file previews can block it.';
