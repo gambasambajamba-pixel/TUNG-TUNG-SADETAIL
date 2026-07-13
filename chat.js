@@ -30,7 +30,7 @@
     .tt-wheel{background:conic-gradient(#ff9d42 0 20deg,#8fc2ff 20deg 100deg,#1477ff 100deg 150deg,#406ca9 150deg 200deg,#dceeff 200deg 280deg,#fff 280deg 360deg)!important}
     .tt-wheel i:nth-of-type(1){--wheel-angle:10deg;width:42px!important;font-size:6.5px!important;font-weight:900!important;letter-spacing:-.04em!important;line-height:.9!important;transform:translate(-50%,-50%) rotate(var(--wheel-angle)) translateY(-93px)!important}.tt-wheel i:nth-of-type(2){--wheel-angle:60deg}.tt-wheel i:nth-of-type(3){--wheel-angle:125deg}.tt-wheel i:nth-of-type(4){--wheel-angle:175deg}.tt-wheel i:nth-of-type(5){--wheel-angle:240deg}.tt-wheel i:nth-of-type(6){--wheel-angle:320deg}
   </style>`);
-  const rangeBanner = '<section class="tt-range-banner"><div class="tt-range-wrap"><div><b>15-mile service range</b><p>Tap “Check my distance” when booking. Under 15 miles, you can choose any service. At 15 miles or farther, one-service bookings such as exterior-only or interior-only are upgraded to the complete interior, exterior, and wet-vac package. Your address is never shown.</p></div><a href="#booking">Check my distance</a></div></section>';
+  const rangeBanner = '<section class="tt-range-banner"><div class="tt-range-wrap"><div><b>15-mile service range</b><p>Use “Check my distance” when booking. Within 15 miles, you can choose any service. At 15 miles or farther, exterior-only and interior-only appointments require the Wet Vac + Full Detail package. Your address is never shown publicly.</p></div><a href="#booking">Check my distance</a></div></section>';
   const hero = document.querySelector('.hero');
   const footer = document.querySelector('footer');
   const heroCopy = document.querySelector('.hero-copy');
@@ -38,9 +38,9 @@
   if (footer) footer.insertAdjacentHTML('beforebegin', rangeBanner);
   if (heroCopy) heroCopy.insertAdjacentHTML('beforeend', '<a class="tt-insta-hero" target="_blank" rel="noreferrer" href="https://www.instagram.com/tungtungsadetail/">◎ &nbsp; Follow @tungtungsadetail ↗</a>');
   const services = document.getElementById('services');
-  if (services) services.insertAdjacentHTML('beforebegin', '<section class="tt-spin" id="spin"><div class="tt-spin-inner"><div><div class="eyebrow" style="color:#8fc2ff">Tung Tung rewards</div><h2>Spin for a detail reward. 🎉</h2><p>The smallest, rarest space wins a <b>Free Wet Vac Service</b>. The <b>5% off</b> spaces sit next to it, while both <b>15% off</b> spaces are together at the bottom. Sign up once with your email or number.</p><form class="tt-spin-form" id="tt-spin-form"><input id="tt-spin-contact" required autocomplete="email" placeholder="Email or mobile number"><button type="submit">Unlock one spin 🎡</button></form><p class="tt-spin-note">Your entry goes to Tung Tung SA Detail. One spin per browser.</p></div><div class="tt-wheel" id="tt-wheel" aria-label="Reward wheel"><i>FREE<br>WET VAC<br>SERVICE</i><i>5% OFF</i><i>15% OFF</i><i>15% OFF</i><i>5% OFF</i><i>5% OFF</i><span>SPIN<br>TO WIN</span></div></div></section>');
+  if (services) services.insertAdjacentHTML('beforebegin', '<section class="tt-spin" id="spin"><div class="tt-spin-inner"><div><div class="eyebrow" style="color:#8fc2ff">TungTungSADetail rewards</div><h2>Spin for a detail reward. 🎉</h2><p>The smallest, rarest space wins a <b>Free Wet Vac Service</b>. The <b>5% off</b> spaces sit next to it, while both <b>15% off</b> spaces are together at the bottom. Sign up once with your email or number.</p><form class="tt-spin-form" id="tt-spin-form"><input id="tt-spin-contact" required autocomplete="email" placeholder="Email or mobile number"><button type="submit">Unlock one spin 🎡</button></form><p class="tt-spin-note">Your entry goes to TungTungSADetail. One spin per browser.</p></div><div class="tt-wheel" id="tt-wheel" aria-label="Reward wheel"><i>FREE<br>WET VAC<br>SERVICE</i><i>5% OFF</i><i>15% OFF</i><i>15% OFF</i><i>5% OFF</i><i>5% OFF</i><span>SPIN<br>TO WIN</span></div></div></section>');
   const footerLocation = document.querySelector('.contact-strip span');
-  if (footerLocation) footerLocation.textContent = '© 2026 Tung Tung SA Detail · 626 area';
+  if (footerLocation) footerLocation.textContent = '© 2026 TungTungSADetail · 626 area';
   document.body.insertAdjacentHTML('beforeend', `<aside id="tt-chat" aria-label="Tung AI"><div id="tt-chat-box"><div class="tt-head"><b>Tung AI</b><span>Friendly answers about services and booking</span></div><div class="tt-messages" id="tt-messages"><div class="tt-msg">Hi! I am here to make booking easy and help your car look its best. Ask me anything about our services!</div></div><form class="tt-form" id="tt-form"><input id="tt-input" aria-label="Ask Tung AI a question" placeholder="Ask Tung AI anything"><button type="submit">Send</button></form><div class="tt-note">For a quote, text a car photo to 626-561-7482.</div></div><button id="tt-chat-toggle" type="button">Chat with Tung AI</button></aside>`);
   const box = document.getElementById('tt-chat');
   const toggle = document.getElementById('tt-chat-toggle');
@@ -52,13 +52,13 @@
   if (spinForm) spinForm.addEventListener('submit', event => {
     event.preventDefault();
     const contact = document.getElementById('tt-spin-contact').value.trim();
-    if (localStorage.getItem('ttSpinUsed')) { alert('This browser has already used its one spin. Thanks for joining Tung Tung rewards!'); return; }
+    if (localStorage.getItem('ttSpinUsed')) { alert('This browser has already used its one spin. Thanks for joining TungTungSADetail rewards!'); return; }
     localStorage.setItem('ttSpinUsed', 'true');
     const rewards = ['FREE WET VAC SERVICE', '15% OFF', '15% OFF', '15% OFF', '15% OFF', '15% OFF', '5% OFF', '5% OFF', '5% OFF', '5% OFF', '5% OFF', '5% OFF', '5% OFF', '5% OFF', '5% OFF', '5% OFF', '5% OFF', '5% OFF'];
     const reward = rewards[Math.floor(Math.random() * rewards.length)];
     saveToSheets({ type: 'wheel', contact, reward });
     spinWheel.classList.add('spinning');
-    const message = encodeURIComponent('Tung Tung SA Detail rewards sign-up\nContact: ' + contact + '\nReward: ' + reward + '\n\nPlease add me to the one-time spin list.');
+    const message = encodeURIComponent('TungTungSADetail rewards sign-up\nContact: ' + contact + '\nReward: ' + reward + '\n\nPlease add me to the one-time spin list.');
     setTimeout(() => { window.location.href = 'sms:+16265617482?body=' + message; }, 7200);
     setTimeout(() => { spinWheel.querySelector('span').innerHTML = 'YOU WON<br>' + reward; spinForm.innerHTML = '<strong style="color:#fff;font-size:14px">You won ' + reward + '! 🎉 Your reward was saved. Send the text to finish signing up.</strong>'; }, 7500);
   });
@@ -125,10 +125,10 @@
     const notice = document.getElementById('distanceNotice');
     const zone = document.getElementById('travelZone');
     const service = document.getElementById('service');
-    if (!addressInput.value.trim()) { notice.innerHTML = '<strong>Enter your driveway or service address first.</strong><br>Then tap “Check my exact address.”'; addressInput.focus(); return; }
+    if (!addressInput.value.trim()) { notice.innerHTML = '<strong>Enter your driveway or service address first.</strong><br>Then tap “Check this exact address.”'; addressInput.focus(); return; }
     notice.innerHTML = '<strong>Checking your exact address…</strong><br>Your address is used only for this booking distance check.';
     try {
-      const query = addressInput.value + ', ' + (cityInput.value || 'San Gabriel') + ', CA';
+      const query = addressInput.value + ', ' + (cityInput.value || '626 area') + ', California';
       const response = await fetch('https://nominatim.openstreetmap.org/search?format=jsonv2&limit=1&q=' + encodeURIComponent(query));
       const result = await response.json();
       if (!result.length) throw new Error('not found');
@@ -188,9 +188,9 @@
     if (/^[0-9+*/().\-\s]+$/.test(math) && /[0-9]/.test(math)) {
       try { return `That is ${Function(`"use strict"; return (${math})`)()}. Happy to help!`; } catch (_) { return 'I can help with simple math, pricing, booking, and detailing questions.'; }
     }
-    if (/^(hi|hello|hey|what'?s up|good morning|good afternoon)/.test(q)) return 'Hi! I am the Tung Tung SA Detail helper. I can help you choose a service, explain pricing, or get your booking started.';
-    if (/creator|manager|owner|who runs|who made|alex/.test(q)) return 'Alex is the creator and manager of Tung Tung SA Detail! 🎉 I’m Tung AI, Alex’s friendly assistant, here to help you book and find what you need.';
-    if (/who are you|are you (an )?ai|what can you do/.test(q)) return 'I’m Tung AI, Alex’s friendly Tung Tung SA Detail assistant! I can help with services, pricing, travel, timing, booking, and guiding you around the site.';
+    if (/^(hi|hello|hey|what'?s up|good morning|good afternoon)/.test(q)) return 'Hi! I am the TungTungSADetail helper. I can help you choose a service, explain pricing, or get your booking started.';
+    if (/creator|manager|owner|who runs|who made|alex/.test(q)) return 'Alex is the creator and manager of TungTungSADetail! 🎉 I’m Tung AI, Alex’s friendly assistant, here to help you book and find what you need.';
+    if (/who are you|are you (an )?ai|what can you do/.test(q)) return 'I’m Tung AI, Alex’s friendly TungTungSADetail assistant! I can help with services, pricing, travel, timing, booking, and guiding you around the site.';
     if (/thank|thanks/.test(q)) return 'You are welcome! When you are ready, use Book Now or text a photo of your car to 626-561-7482 for a quote.';
     if (/price|cost|how much|\$/.test(q)) return 'Exterior Wash starts at $40. Interior Detail starts at $70. Full Detail starts at $100. Wet Vac plus Full Detail starts at $130. Final quotes depend on vehicle size and condition.';
     if (/book|appointment|schedule|date|time/.test(q)) return 'Use the Book Now section to choose a service, date, and time. It opens a pre-filled text to 626-561-7482 so we can confirm your appointment.';
@@ -200,8 +200,8 @@
     if (/service|clay|headlight|interior|exterior/.test(q)) return 'We offer Exterior Wash, Interior Detail, Full Detail, Wet Vac plus Full Detail, and Clay Bar as an add-on. Headlight restoration is coming soon.';
     if (/instagram|insta/.test(q)) return 'You can follow us on Instagram at @tungtungsadetail.';
     if (/joke|funny|random/.test(q)) { const jokes = ['Why did the car go to school? To improve its driving knowledge!', 'What do you call a shiny car? A clean machine!', 'Why did the car get a detail? It wanted to look exhaust-ingly good!']; return jokes[Math.floor(Math.random() * jokes.length)]; }
-    if (/weather|news|school|game|movie/.test(q)) return 'That is a fun question! I am best at helping with Tung Tung SA Detail, but I can also help with simple math and car jokes. For your car, text a photo and your question to 626-561-7482 and we will be happy to help.';
-    return 'I’m excited to help! I can answer questions about Tung Tung SA Detail, simple everyday questions, and fun car stuff. For a quote tailored to your car, text a photo to 626-561-7482.';
+    if (/weather|news|school|game|movie/.test(q)) return 'That is a fun question! I am best at helping with TungTungSADetail, but I can also help with simple math and car jokes. For your car, text a photo and your question to 626-561-7482 and we will be happy to help.';
+    return 'I’m excited to help! I can answer questions about TungTungSADetail, simple everyday questions, and fun car stuff. For a quote tailored to your car, text a photo to 626-561-7482.';
   };
   const navigationFor = question => {
     const q = question.toLowerCase();
