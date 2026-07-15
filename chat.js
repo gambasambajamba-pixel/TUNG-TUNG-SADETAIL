@@ -38,7 +38,7 @@
   if (footer) footer.insertAdjacentHTML('beforebegin', rangeBanner);
   if (heroCopy) heroCopy.insertAdjacentHTML('beforeend', '<a class="tt-insta-hero" target="_blank" rel="noreferrer" href="https://www.instagram.com/tungtungsadetail/">◎ &nbsp; Follow @tungtungsadetail ↗</a>');
   const services = document.getElementById('services');
-  if (services) services.insertAdjacentHTML('beforebegin', '<section class="tt-spin" id="spin"><div class="tt-spin-inner"><div><div class="eyebrow" style="color:#8fc2ff">TungTungSADetail rewards</div><h2>Spin for a detail reward. 🎉</h2><p>The smallest, rarest space wins a <b>Free Wet Vac Service</b>. The <b>5% off</b> spaces sit next to it, while both <b>15% off</b> spaces are together at the bottom. Sign up once with your email or number.</p><form class="tt-spin-form" id="tt-spin-form"><input id="tt-spin-contact" required autocomplete="email" placeholder="Email or mobile number"><button type="submit">Unlock one spin 🎡</button></form><p class="tt-spin-note">Your entry goes to TungTungSADetail. One spin per browser.</p></div><div class="tt-wheel" id="tt-wheel" aria-label="Reward wheel"><i>FREE<br>WET VAC<br>SERVICE</i><i>5% OFF</i><i>15% OFF</i><i>15% OFF</i><i>5% OFF</i><i>5% OFF</i><span>SPIN<br>TO WIN</span></div></div></section>');
+  if (services) services.insertAdjacentHTML('beforebegin', '<section class="tt-spin" id="spin"><div class="tt-spin-inner"><div><div class="eyebrow" style="color:#8fc2ff">TungTungSADetail rewards</div><h2>Spin for a detail reward. 🎉</h2><p>The wheel keeps the same prize layout, with a boosted chance to win a <b>Free Wet Vac Service</b> or <b>5% off</b>. <b>15% off</b> is the bonus reward. Sign up once with your email or number.</p><form class="tt-spin-form" id="tt-spin-form"><input id="tt-spin-contact" required autocomplete="email" placeholder="Email or mobile number"><button type="submit">Unlock one spin 🎡</button></form><p class="tt-spin-note">Your entry goes to TungTungSADetail. One spin per browser.</p></div><div class="tt-wheel" id="tt-wheel" aria-label="Reward wheel"><i>FREE<br>WET VAC<br>SERVICE</i><i>5% OFF</i><i>15% OFF</i><i>15% OFF</i><i>5% OFF</i><i>5% OFF</i><span>SPIN<br>TO WIN</span></div></div></section>');
   const footerLocation = document.querySelector('.contact-strip span');
   if (footerLocation) footerLocation.textContent = '© 2026 TungTungSADetail · 626 area';
   document.body.insertAdjacentHTML('beforeend', `<aside id="tt-chat" aria-label="Tung AI"><div id="tt-chat-box"><div class="tt-head"><b>Tung AI</b><span>Friendly answers about services and booking</span></div><div class="tt-messages" id="tt-messages"><div class="tt-msg">Hi! I am here to make booking easy and help your car look its best. Ask me anything about our services!</div></div><form class="tt-form" id="tt-form"><input id="tt-input" aria-label="Ask Tung AI a question" placeholder="Ask Tung AI anything"><button type="submit">Send</button></form><div class="tt-note">For a quote, text a car photo to 626-561-7482.</div></div><button id="tt-chat-toggle" type="button">Chat with Tung AI</button></aside>`);
@@ -54,7 +54,13 @@
     const contact = document.getElementById('tt-spin-contact').value.trim();
     if (localStorage.getItem('ttSpinUsed')) { alert('This browser has already used its one spin. Thanks for joining TungTungSADetail rewards!'); return; }
     localStorage.setItem('ttSpinUsed', 'true');
-    const rewards = ['FREE WET VAC SERVICE', '15% OFF', '15% OFF', '15% OFF', '15% OFF', '15% OFF', '5% OFF', '5% OFF', '5% OFF', '5% OFF', '5% OFF', '5% OFF', '5% OFF', '5% OFF', '5% OFF', '5% OFF', '5% OFF', '5% OFF'];
+    // 40% Free Wet Vac Service, 50% 5% Off, and 10% 15% Off.
+    // The wheel artwork stays unchanged while these are the disclosed prize odds.
+    const rewards = [
+      'FREE WET VAC SERVICE', 'FREE WET VAC SERVICE', 'FREE WET VAC SERVICE', 'FREE WET VAC SERVICE',
+      '5% OFF', '5% OFF', '5% OFF', '5% OFF', '5% OFF',
+      '15% OFF'
+    ];
     const reward = rewards[Math.floor(Math.random() * rewards.length)];
     saveToSheets({ type: 'wheel', contact, reward });
     spinWheel.classList.add('spinning');
