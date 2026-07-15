@@ -54,11 +54,12 @@
     const contact = document.getElementById('tt-spin-contact').value.trim();
     if (localStorage.getItem('ttSpinUsed')) { alert('This browser has already used its one spin. Thanks for joining TungTungSADetail rewards!'); return; }
     localStorage.setItem('ttSpinUsed', 'true');
-    // 40% Free Wet Vac Service, 50% 5% Off, and 10% 15% Off.
+    // 60% Free Wet Vac Service, 30% 5% Off, and 10% 15% Off.
     // The wheel artwork stays unchanged while these are the disclosed prize odds.
     const rewards = [
-      'FREE WET VAC SERVICE', 'FREE WET VAC SERVICE', 'FREE WET VAC SERVICE', 'FREE WET VAC SERVICE',
-      '5% OFF', '5% OFF', '5% OFF', '5% OFF', '5% OFF',
+      'FREE WET VAC SERVICE', 'FREE WET VAC SERVICE', 'FREE WET VAC SERVICE',
+      'FREE WET VAC SERVICE', 'FREE WET VAC SERVICE', 'FREE WET VAC SERVICE',
+      '5% OFF', '5% OFF', '5% OFF',
       '15% OFF'
     ];
     const reward = rewards[Math.floor(Math.random() * rewards.length)];
