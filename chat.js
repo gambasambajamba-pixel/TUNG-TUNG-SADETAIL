@@ -30,15 +30,44 @@
     .tt-wheel{background:conic-gradient(#ff9d42 0 20deg,#8fc2ff 20deg 100deg,#1477ff 100deg 150deg,#406ca9 150deg 200deg,#dceeff 200deg 280deg,#fff 280deg 360deg)!important}
     .tt-wheel i:nth-of-type(1){--wheel-angle:10deg;width:42px!important;font-size:6.5px!important;font-weight:900!important;letter-spacing:-.04em!important;line-height:.9!important;transform:translate(-50%,-50%) rotate(var(--wheel-angle)) translateY(-93px)!important}.tt-wheel i:nth-of-type(2){--wheel-angle:60deg}.tt-wheel i:nth-of-type(3){--wheel-angle:125deg}.tt-wheel i:nth-of-type(4){--wheel-angle:175deg}.tt-wheel i:nth-of-type(5){--wheel-angle:240deg}.tt-wheel i:nth-of-type(6){--wheel-angle:320deg}
   </style>`);
+  document.head.insertAdjacentHTML('beforeend', `<style>
+    #tt-season{background:linear-gradient(105deg,var(--season-1),var(--season-2));color:#fff;padding:13px 0;position:relative;overflow:hidden}
+    #tt-season:after{content:'✦  ✦  ✦  ✦  ✦  ✦';position:absolute;right:-8px;top:8px;opacity:.22;letter-spacing:18px;font-size:20px;white-space:nowrap}
+    .tt-season-wrap{max-width:1200px;margin:auto;padding:0 28px;display:flex;align-items:center;justify-content:space-between;gap:20px;position:relative;z-index:1}
+    .tt-season-copy{display:flex;align-items:center;gap:11px;font-size:12px}.tt-season-copy strong{font:900 12px Manrope;letter-spacing:.08em}.tt-season-copy span{opacity:.92}
+    .tt-season-wrap a{display:inline-flex;align-items:center;justify-content:center;padding:9px 13px;background:#fff;color:#071429;font:800 10px Manrope;letter-spacing:.06em;text-transform:uppercase;white-space:nowrap}
+    .tt-steps{background:#fff;padding:46px 0}.tt-steps-wrap{max-width:1200px;margin:auto;padding:0 28px;display:grid;grid-template-columns:1.1fr 2fr;gap:35px;align-items:center}.tt-steps-intro b{font:800 11px DM Mono,monospace;letter-spacing:.12em;text-transform:uppercase;color:#1477ff}.tt-steps-intro h2{font:700 clamp(30px,4vw,45px)/1.05 'Playfair Display',serif;letter-spacing:-.045em;margin:9px 0 0}.tt-steps-list{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.tt-step{background:#eff8ff;padding:18px;border-top:3px solid #1477ff}.tt-step b{display:block;font:900 10px DM Mono,monospace;letter-spacing:.12em;color:#1477ff}.tt-step strong{display:block;font-size:14px;margin:9px 0 6px}.tt-step p{font-size:11px;line-height:1.55;margin:0;color:#425b74}
+    body[data-season='spring']{--season-1:#147f70;--season-2:#63b84c}body[data-season='summer']{--season-1:#1477ff;--season-2:#7a4ee8}body[data-season='fall']{--season-1:#a94d19;--season-2:#e49b27}body[data-season='winter']{--season-1:#24538d;--season-2:#8355c7}
+    @media(max-width:760px){.tt-season-wrap{padding:0 20px;display:block}.tt-season-copy{margin-bottom:9px;align-items:flex-start}.tt-season-copy span{display:block}.tt-season-wrap a{margin-left:31px}.tt-steps-wrap{padding:0 20px;display:block}.tt-steps-list{margin-top:22px;grid-template-columns:1fr}.tt-step{padding:16px}.tt-season-copy strong{min-width:80px}}
+  </style>`);
   const rangeBanner = '<section class="tt-range-banner"><div class="tt-range-wrap"><div><b>15-mile service range</b><p>Use “Check my distance” when booking. Within 15 miles, you can choose any service. At 15 miles or farther, exterior-only and interior-only appointments require the Wet Vac + Full Detail package. Your address is never shown publicly.</p></div><a href="#booking">Check my distance</a></div></section>';
   const hero = document.querySelector('.hero');
   const footer = document.querySelector('footer');
   const heroCopy = document.querySelector('.hero-copy');
+  const seasonalCampaigns = [
+    { season: 'winter', icon: '❄️', title: 'Fresh Start Detail Month', copy: 'Start the year with a clean, comfortable car.', cta: 'Book your refresh' },
+    { season: 'winter', icon: '💙', title: 'Love Your Car Month', copy: 'Show your ride some extra care this month.', cta: 'Book a detail' },
+    { season: 'spring', icon: '🌿', title: 'Spring Reset Month', copy: 'Shake off the dust and bring back the shine.', cta: 'Refresh my car' },
+    { season: 'spring', icon: '✨', title: 'Spring Shine Month', copy: 'A clean car feels better every drive.', cta: 'Book now' },
+    { season: 'spring', icon: '🚗', title: 'Road Trip Ready Month', copy: 'Get your interior and exterior ready for every mile.', cta: 'Get road-trip ready' },
+    { season: 'summer', icon: '☀️', title: 'Summer Shine Month', copy: 'Keep your car fresh for summer drives.', cta: 'Get summer ready' },
+    { season: 'summer', icon: '🌊', title: 'Summer Clean-Up Month', copy: 'Bring back that clean-car feeling.', cta: 'Book a detail' },
+    { season: 'summer', icon: '🔥', title: 'Heat & Dust Reset Month', copy: 'A fresh interior makes every drive better.', cta: 'Refresh my car' },
+    { season: 'fall', icon: '🍂', title: 'Fall Reset Month', copy: 'Clear out the summer mess before the new season.', cta: 'Book my reset' },
+    { season: 'fall', icon: '🎃', title: 'October Glow-Up Month', copy: 'Give your car a clean that is scary good.', cta: 'Book a glow-up' },
+    { season: 'fall', icon: '🍁', title: 'Holiday Drive Ready', copy: 'Clean up your car before holiday plans begin.', cta: 'Reserve a spot' },
+    { season: 'winter', icon: '🎁', title: 'Holiday Shine Month', copy: 'Arrive clean, fresh, and ready for every celebration.', cta: 'Book before the holidays' }
+  ];
+  const campaign = seasonalCampaigns[new Date().getMonth()];
+  document.body.dataset.season = campaign.season;
+  const referralBar = document.querySelector('.referral-bar');
+  if (referralBar) referralBar.insertAdjacentHTML('afterend', `<section id="tt-season" aria-label="This month's TungTungSADetail theme"><div class="tt-season-wrap"><div class="tt-season-copy"><b>${campaign.icon}</b><strong>${campaign.title}</strong><span>${campaign.copy}</span></div><a href="#booking">${campaign.cta} ↗</a></div></section>`);
   if (hero) hero.insertAdjacentHTML('afterend', rangeBanner);
   if (footer) footer.insertAdjacentHTML('beforebegin', rangeBanner);
   if (heroCopy) heroCopy.insertAdjacentHTML('beforeend', '<a class="tt-insta-hero" target="_blank" rel="noreferrer" href="https://www.instagram.com/tungtungsadetail/">◎ &nbsp; Follow @tungtungsadetail ↗</a>');
   const services = document.getElementById('services');
   if (services) services.insertAdjacentHTML('beforebegin', '<section class="tt-spin" id="spin"><div class="tt-spin-inner"><div><div class="eyebrow" style="color:#8fc2ff">TungTungSADetail rewards</div><h2>Spin for a detail reward. 🎉</h2><p>The wheel keeps the same prize layout, with a boosted chance to win a <b>Free Wet Vac Service</b> or <b>5% off</b>. <b>15% off</b> is the bonus reward. Sign up once with your email or number.</p><form class="tt-spin-form" id="tt-spin-form"><input id="tt-spin-contact" required autocomplete="email" placeholder="Email or mobile number"><button type="submit">Unlock one spin 🎡</button></form><p class="tt-spin-note">Your entry goes to TungTungSADetail. One spin per browser.</p></div><div class="tt-wheel" id="tt-wheel" aria-label="Reward wheel"><i>FREE<br>WET VAC<br>SERVICE</i><i>5% OFF</i><i>15% OFF</i><i>15% OFF</i><i>5% OFF</i><i>5% OFF</i><span>SPIN<br>TO WIN</span></div></div></section>');
+  if (services) services.insertAdjacentHTML('afterend', '<section class="tt-steps"><div class="tt-steps-wrap"><div class="tt-steps-intro"><b>Easy from start to finish</b><h2>Book in three simple steps.</h2></div><div class="tt-steps-list"><article class="tt-step"><b>01</b><strong>Choose your service</strong><p>Pick the detail that fits your vehicle and your needs.</p></article><article class="tt-step"><b>02</b><strong>Enter your location</strong><p>Share your city and type the exact driveway or service address.</p></article><article class="tt-step"><b>03</b><strong>Get confirmed</strong><p>Alex receives your request and confirms your appointment by text, call, or email.</p></article></div></div></section>');
   const footerLocation = document.querySelector('.contact-strip span');
   if (footerLocation) footerLocation.textContent = '© 2026 TungTungSADetail · 626 area';
   document.body.insertAdjacentHTML('beforeend', `<aside id="tt-chat" aria-label="Tung AI"><div id="tt-chat-box"><div class="tt-head"><b>Tung AI</b><span>Friendly answers about services and booking</span></div><div class="tt-messages" id="tt-messages"><div class="tt-msg">Hi! I am here to make booking easy and help your car look its best. Ask me anything about our services!</div></div><form class="tt-form" id="tt-form"><input id="tt-input" aria-label="Ask Tung AI a question" placeholder="Ask Tung AI anything"><button type="submit">Send</button></form><div class="tt-note">For a quote, text a car photo to 626-561-7482.</div></div><button id="tt-chat-toggle" type="button">Chat with Tung AI</button></aside>`);
