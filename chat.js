@@ -236,7 +236,7 @@
     const travelZone = document.getElementById('travelZone').value;
     const distance = document.getElementById('distanceNotice').dataset.miles;
     if (!travelZone) {
-      alert('Please tap “Use my location to check” before submitting your booking. This lets us confirm the correct service package.');
+      alert('Please use “Use my phone location to find city” or “Check this exact address” before submitting your booking. This lets us confirm the correct service package.');
       return;
     }
     if (travelZone === 'outside' && service !== 'Wet Vac + Full Detail — $130+') {
