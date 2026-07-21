@@ -23,6 +23,9 @@
     .tt-insta-hero{background:linear-gradient(135deg,#ffb347,#f52b71 48%,#714bd9)!important;border:0!important;box-shadow:0 12px 25px rgba(245,43,113,.28);font-size:12px!important;padding:13px 16px!important}
   </style>`);
   document.head.insertAdjacentHTML('beforeend', `<style>
+    .tt-confidence{background:#fff;border-bottom:1px solid #dce6f2}.tt-confidence-wrap{max-width:1200px;margin:auto;padding:18px 28px;display:grid;grid-template-columns:repeat(3,1fr);gap:18px}.tt-confidence-item{display:flex;align-items:center;gap:11px;font-size:12px;font-weight:800;color:#10243e}.tt-confidence-item b{display:grid;place-items:center;width:28px;height:28px;border-radius:50%;background:#e9f4ff;color:#1477ff;font:800 10px Manrope}.tt-confidence-item span{font-weight:600;color:#58708a}.tt-distance{border-radius:12px}.tt-range-btn{margin-top:8px;border-radius:9px;transition:transform .18s ease,background .18s ease}.tt-range-btn:hover{background:#0d67e8;transform:translateY(-1px)}.tt-note{line-height:1.45}.tt-booking-note{margin:0;color:#6a7d93;font-size:11px;line-height:1.5}.tt-spin-note{line-height:1.55}.tt-spin-form input:focus{outline:3px solid #ffb14b;outline-offset:3px}.tt-wheel[aria-label]{cursor:default}@media(max-width:700px){.tt-confidence-wrap{grid-template-columns:1fr;padding:17px 20px;gap:11px}.tt-confidence-item{font-size:12px}}
+  </style>`);
+  document.head.insertAdjacentHTML('beforeend', `<style>
     /* Premium visual refresh */
     :root{--ink:#081526;--navy:#0b1d35;--blue:#247cff;--sky:#eaf4ff;--ice:#f7f9fc;--line:#d9e3f0;--orange:#ffb14b}
     body{background:var(--ice);letter-spacing:-.01em}.wrap{max-width:1260px}.referral-bar{background:#081526;color:#fff;padding:12px 20px;font-size:11px}.referral-bar strong{color:#ffcf82}.referral-bar span{opacity:.82;font-weight:600}
@@ -77,6 +80,7 @@
   const topOffer = document.querySelector('.monthly-detail-deal');
   if (topOffer) topOffer.insertAdjacentHTML('afterend', `<section id="tt-season" aria-label="This month's TungTungSADetail theme"><div class="tt-season-art">${campaign.art || ''}</div><div class="tt-season-wrap"><div class="tt-season-copy"><b>${campaign.icon}</b><strong>${campaign.title}</strong><span>${campaign.copy}</span></div><a href="#booking">${campaign.cta} ↗</a></div></section>`);
   if (hero) hero.insertAdjacentHTML('afterend', rangeBanner);
+  if (hero) hero.insertAdjacentHTML('afterend', '<section class="tt-confidence" aria-label="What to expect"><div class="tt-confidence-wrap"><div class="tt-confidence-item"><b>✓</b><div>Clear starting prices <span>from $40</span></div></div><div class="tt-confidence-item"><b>⌖</b><div>Mobile 626 service <span>we come to you</span></div></div><div class="tt-confidence-item"><b>◷</b><div>Careful appointments <span>usually 2–3+ hours</span></div></div></div></section>');
   if (footer) footer.insertAdjacentHTML('beforebegin', rangeBanner);
   if (heroCopy) heroCopy.insertAdjacentHTML('beforeend', '<a class="tt-insta-hero" target="_blank" rel="noreferrer" href="https://www.instagram.com/tungtungsadetail/">◎ &nbsp; Follow @tungtungsadetail ↗</a>');
   const services = document.getElementById('services');
@@ -84,7 +88,7 @@
   if (services) services.insertAdjacentHTML('afterend', `<section class="tt-season-feature"><div class="tt-season-feature-inner"><div><div class="eyebrow">${campaign.icon} · ${campaign.title}</div><h2>${campaign.season === 'summer' ? 'Beach days are better with a fresh ride.' : 'A seasonal refresh for your ride.'}</h2><p>${campaign.season === 'summer' ? 'From sandy floors to road-trip crumbs and summer dust, book the detail that makes every drive feel better.' : campaign.copy}</p><a href="#booking">${campaign.cta} ↗</a></div><div class="tt-season-points"><article class="tt-season-point"><strong>${campaign.season === 'summer' ? 'Beach-day cleanup' : 'Seasonal refresh'}</strong></article><article class="tt-season-point"><strong>${campaign.season === 'summer' ? 'Road-trip ready' : 'Ready for every drive'}</strong></article><article class="tt-season-point"><strong>${campaign.season === 'summer' ? 'Cool, clean interior' : 'Clean inside and out'}</strong></article></div></div></section>`);
   const footerLocation = document.querySelector('.contact-strip span');
   if (footerLocation) footerLocation.textContent = '© 2026 TungTungSADetail · 626 area';
-  document.body.insertAdjacentHTML('beforeend', `<aside id="tt-chat" aria-label="Tung AI"><div id="tt-chat-box"><div class="tt-head"><b>Tung AI</b><span>Friendly answers about services and booking</span></div><div class="tt-messages" id="tt-messages"><div class="tt-msg">Hi! I am here to make booking easy and help your car look its best. Ask me anything about our services!</div></div><form class="tt-form" id="tt-form"><input id="tt-input" aria-label="Ask Tung AI a question" placeholder="Ask Tung AI anything"><button type="submit">Send</button></form><div class="tt-note">For a quote, text a car photo to 626-561-7482.</div></div><button id="tt-chat-toggle" type="button">Chat with Tung AI</button></aside>`);
+  document.body.insertAdjacentHTML('beforeend', `<aside id="tt-chat" aria-label="Tung AI"><div id="tt-chat-box"><div class="tt-head"><b>Tung AI</b><span>Friendly answers about services and booking</span></div><div class="tt-messages" id="tt-messages" aria-live="polite"><div class="tt-msg">Hi! I am here to make booking easy and help your car look its best. Ask me anything about our services!</div></div><form class="tt-form" id="tt-form"><input id="tt-input" aria-label="Ask Tung AI a question" placeholder="Ask Tung AI anything"><button type="submit">Send</button></form><div class="tt-note">For a quote, text a car photo to 626-561-7482.</div></div><button id="tt-chat-toggle" type="button" aria-expanded="false">Chat with Tung AI</button></aside>`);
   const box = document.getElementById('tt-chat');
   const toggle = document.getElementById('tt-chat-toggle');
   const form = document.getElementById('tt-form');
@@ -95,6 +99,9 @@
   if (spinForm) spinForm.addEventListener('submit', event => {
     event.preventDefault();
     const contact = document.getElementById('tt-spin-contact').value.trim();
+    const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(contact);
+    const phoneOk = contact.replace(/\D/g, '').length >= 10;
+    if (!emailOk && !phoneOk) { alert('Please enter a valid email address or 10-digit mobile number to unlock your spin.'); return; }
     if (localStorage.getItem('ttSpinUsed')) { alert('This browser has already used its one spin. Thanks for joining TungTungSADetail rewards!'); return; }
     localStorage.setItem('ttSpinUsed', 'true');
     // 60% Free Wet Vac Service, 30% 5% Off, and 10% 15% Off.
@@ -129,7 +136,7 @@
   if (aboutCopy) aboutCopy.textContent = 'We can detail at your driveway or at our location. At 15 miles or farther, exterior-only and interior-only bookings are upgraded to the complete interior, exterior, and wet-vac package. Please provide access to water at the service location. Most appointments take around 2–3+ hours, depending on vehicle size and condition.';
   if (bookingForm) {
     const bookingButton = bookingForm.querySelector('button[type="submit"]');
-    if (bookingButton) bookingButton.insertAdjacentHTML('beforebegin', '<div class="field"><label>Find your city</label><input id="travelZone" type="hidden"><button class="tt-range-btn" id="locationCheck" type="button">Use my phone location to find city</button></div><div class="field"><label for="serviceArea">City</label><input id="serviceArea" required autocomplete="address-level2" placeholder="Autofills from your location"></div><div class="field full"><label for="serviceAddress">Exact service address</label><input id="serviceAddress" required autocomplete="street-address" placeholder="Type the exact driveway or service address"><button class="tt-range-btn" id="addressCheck" type="button">Check this exact address</button></div><div class="field full"><div class="tt-distance" id="distanceNotice"><span class="tt-range-dot">15<br>mi</span><strong>Check your service range</strong><br>Use your phone location to find your city, then type the exact driveway or service address yourself. Your address is never shown publicly.</div></div>');
+    if (bookingButton) bookingButton.insertAdjacentHTML('beforebegin', '<div class="field"><label>Find your city</label><input id="travelZone" type="hidden"><button class="tt-range-btn" id="locationCheck" type="button">Use my phone location to find city</button></div><div class="field"><label for="serviceArea">City</label><input id="serviceArea" required autocomplete="address-level2" placeholder="Autofills from your location"></div><div class="field full"><label for="serviceAddress">Exact service address</label><input id="serviceAddress" required autocomplete="street-address" placeholder="Type the exact driveway or service address"><button class="tt-range-btn" id="addressCheck" type="button">Check this exact address</button></div><div class="field full"><div class="tt-distance" id="distanceNotice" aria-live="polite"><span class="tt-range-dot">15<br>mi</span><strong>Check your service range</strong><br>Use your phone location to find your city, then type the exact driveway or service address yourself. Your address is never shown publicly.</div></div><p class="full tt-booking-note">Your booking details are used only to confirm this appointment and are never displayed publicly.</p>');
   }
   if (monthlyForm) monthlyForm.addEventListener('submit', event => {
     event.preventDefault();
@@ -235,6 +242,13 @@
     const serviceAddress = document.getElementById('serviceAddress').value;
     const travelZone = document.getElementById('travelZone').value;
     const distance = document.getElementById('distanceNotice').dataset.miles;
+    const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(contact);
+    const phoneOk = contact.replace(/\D/g, '').length >= 10;
+    if (!emailOk && !phoneOk) {
+      alert('Please enter a valid email address or 10-digit phone number so Alex can confirm your appointment.');
+      document.getElementById('contact').focus();
+      return;
+    }
     if (!travelZone) {
       alert('Please use “Use my phone location to find city” or “Check this exact address” before submitting your booking. This lets us confirm the correct service package.');
       return;
@@ -247,7 +261,6 @@
     const text = encodeURIComponent('Thank you for booking with TUNGTUNGSADETAIL!\n\nNew booking request\nService: ' + service + '\nPreferred date: ' + date + '\nPreferred time: ' + time + '\nCustomer: ' + name + '\nContact: ' + contact + '\nDistance: ' + distance + ' miles (' + travelZone + ')\nCity: ' + serviceArea + '\nService address: ' + serviceAddress + '\n\nTravel note: Locations 15 miles or farther require the Wet Vac + Full Detail package.');
     const smsLink = 'sms:+16265617482?body=' + text;
     saveToSheets({ type: 'booking', service, date, time, name, contact, city: serviceArea, address: serviceAddress, distance, travelRule: travelZone });
-    window.location.href = smsLink;
     bookingForm.innerHTML = '<div class="full" style="text-align:center;padding:42px 8px;background:#eff8ff"><div class="eyebrow">Booking request ready</div><h3 style="font:700 35px Playfair Display,serif;letter-spacing:-.04em;margin:15px 0;color:#071429">THANK YOU FOR CHOOSING<br>TUNGTUNGSADETAIL</h3><p style="font-size:14px;line-height:1.7;max-width:420px;margin:0 auto 18px">Your text message is ready to send. Open Messages and tap Send to deliver the booking request.</p><a class="btn" style="display:inline-flex" href="' + smsLink + '">Send booking text</a></div>';
     const colors = ['#1477ff','#ff9d42','#dceeff','#ffffff','#87c3ff'];
     for (let i = 0; i < 78; i++) {
@@ -262,6 +275,7 @@
       document.body.appendChild(piece);
       setTimeout(() => piece.remove(), 2400);
     }
+    setTimeout(() => { window.location.href = smsLink; }, 250);
   }, true);
   const answer = question => {
     const q = question.toLowerCase();
@@ -294,7 +308,7 @@
     if (/instagram|insta/.test(q)) return { href: 'https://www.instagram.com/tungtungsadetail/', label: 'Yes — open Instagram! 📲', external: true };
     return null;
   };
-  toggle.onclick = () => { box.classList.toggle('open'); if (box.classList.contains('open')) input.focus(); };
+  toggle.onclick = () => { box.classList.toggle('open'); const isOpen = box.classList.contains('open'); toggle.setAttribute('aria-expanded', String(isOpen)); if (isOpen) input.focus(); };
   form.onsubmit = event => {
     event.preventDefault();
     const question = input.value.trim();
