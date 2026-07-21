@@ -22,6 +22,19 @@
   document.head.insertAdjacentHTML('beforeend', `<style>
     .tt-insta-hero{background:linear-gradient(135deg,#ffb347,#f52b71 48%,#714bd9)!important;border:0!important;box-shadow:0 12px 25px rgba(245,43,113,.28);font-size:12px!important;padding:13px 16px!important}
   </style>`);
+  document.head.insertAdjacentHTML('beforeend', `<style>
+    /* Premium visual refresh */
+    :root{--ink:#081526;--navy:#0b1d35;--blue:#247cff;--sky:#eaf4ff;--ice:#f7f9fc;--line:#d9e3f0;--orange:#ffb14b}
+    body{background:var(--ice);letter-spacing:-.01em}.wrap{max-width:1260px}.referral-bar{background:#081526;color:#fff;padding:12px 20px;font-size:11px}.referral-bar strong{color:#ffcf82}.referral-bar span{opacity:.82;font-weight:600}
+    .hero{min-height:760px;background:linear-gradient(90deg,rgba(4,14,29,.87) 0%,rgba(4,14,29,.61) 45%,rgba(4,14,29,.12) 79%),url('assets/white-bmw-enhanced.png') center/cover}.nav{height:88px;border-bottom:1px solid rgba(255,255,255,.16)}.logo{font-size:14px;letter-spacing:.04em}.logo img{width:42px;height:42px;border:1px solid rgba(255,255,255,.55)}.links{font-size:10px;letter-spacing:.09em;gap:24px}.links a{opacity:.8;transition:opacity .2s ease}.links a:hover{opacity:1}.btn{border-radius:999px;padding:15px 22px;box-shadow:0 8px 20px rgba(18,92,202,.19);transition:transform .22s ease,box-shadow .22s ease,background .22s ease}.btn:hover{box-shadow:0 14px 30px rgba(18,92,202,.28)}.nav>.btn{border:1px solid rgba(255,255,255,.72);box-shadow:none}.hero-copy{padding-top:145px;max-width:690px}.hero-copy h1{font-size:clamp(56px,7vw,92px);letter-spacing:-.065em}.hero-copy p{font-size:16px;max-width:490px}.hero-contact{gap:30px;color:#d5e9ff}
+    section{padding:110px 0}.head{margin-bottom:48px}.head h2,.pricing h2{letter-spacing:-.065em}.services{background:#fff}.cards{gap:18px}.card{min-height:286px;padding:30px;border:1px solid #e7edf5;border-top:0;border-radius:18px;background:#fbfcfe;box-shadow:0 14px 32px rgba(12,37,76,.06);transition:transform .25s ease,box-shadow .25s ease}.card:nth-child(2){background:linear-gradient(145deg,#0b1d35,#132f55);border-color:#132f55}.card:hover{transform:translateY(-6px);box-shadow:0 23px 45px rgba(12,37,76,.13)}.card h3{font-size:34px}.card > strong:first-child{display:none}.coming{margin-top:22px;border:1px solid #cddff3;border-radius:14px;background:#f1f7ff}
+    .gallery{background:#081526}.gallery-grid{gap:18px}.shot{border-radius:15px;box-shadow:0 18px 35px rgba(0,0,0,.18);transition:transform .3s ease,filter .3s ease}.shot:hover{transform:translateY(-4px);filter:brightness(1.07)}.label{left:16px;bottom:16px;border-radius:999px;background:#fff;color:#081526;padding:8px 12px;font-weight:800}.label.before{background:#247cff;color:#fff}
+    .pricing{background:linear-gradient(145deg,#eaf5ff,#d5eaff)}.price-layout{gap:80px}.price{padding:24px 0}.price h3{font-size:17px}.price strong{font-size:21px}.box{border-radius:20px;padding:40px;background:linear-gradient(145deg,#102a4c,#071526);box-shadow:0 20px 40px rgba(7,21,38,.2)}.box .btn{background:#ffb14b;color:#081526;box-shadow:none}
+    .about{background:#fff}.about-note{border-radius:20px;background:linear-gradient(145deg,#eff7ff,#d8ecff);border:1px solid #c7e0fb}.review-band{background:#f7f9fc}.review-card{border-radius:20px;background:linear-gradient(130deg,#eaf5ff,#d6eaff);padding:48px;box-shadow:0 15px 33px rgba(13,48,92,.07)}.quote{letter-spacing:-.04em}.review-link{font-size:12px}.booking{background:linear-gradient(145deg,#1d7cf4,#115cca)}.form{border-radius:20px;padding:32px;box-shadow:0 22px 50px rgba(4,44,105,.24)}.field input,.field select{border-radius:10px;border-color:#d7e1ee;padding:14px;transition:border-color .2s ease,box-shadow .2s ease}.field input:focus,.field select:focus{outline:0;border-color:#247cff;box-shadow:0 0 0 4px rgba(36,124,255,.12)}.form .btn{margin-top:4px}.insta{background:radial-gradient(circle at 50% 0,#1b3e6b,#081526 62%);padding:96px 0}.contact-strip{background:#06101f}
+    .side-menu summary,#tt-chat-toggle{border-radius:999px!important}.side-menu summary{box-shadow:0 14px 30px rgba(6,28,67,.26)}.quick-reviews{background:#fff;border-bottom:1px solid #e5edf7}.tt-range-banner{background:#eaf5ff}.tt-spin{background:linear-gradient(145deg,#071526,#102d50)}.tt-spin-form input{border-radius:10px}.tt-spin-form button{border-radius:10px}.tt-season-feature{background:#fff}.tt-season-point{box-shadow:0 12px 26px rgba(13,48,92,.05)}
+    @media (prefers-reduced-motion:no-preference){.tt-reveal{opacity:0;transform:translateY(22px);transition:opacity .65s ease,transform .65s ease}.tt-reveal.is-visible{opacity:1;transform:none}.tt-reveal:nth-child(2){transition-delay:.08s}.tt-reveal:nth-child(3){transition-delay:.16s}}
+    @media(max-width:760px){.referral-bar span{display:block;margin:4px 0 0}.hero{min-height:690px}.hero-copy{padding-top:122px}.hero-copy h1{font-size:54px}.cards{gap:14px}.card{min-height:215px}.gallery-grid{gap:10px}.review-card{padding:30px}.form{padding:22px}.box{padding:30px}}
+  </style>`);
   document.head.insertAdjacentHTML('beforeend', '<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 64 64%27%3E%3Cdefs%3E%3ClinearGradient id=%27g%27 x1=%270%27 y1=%271%27 x2=%271%27 y2=%270%27%3E%3Cstop stop-color=%27%23ffb347%27/%3E%3Cstop offset=%27.5%27 stop-color=%27%23f52b71%27/%3E%3Cstop offset=%271%27 stop-color=%27%23714bd9%27/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width=%2764%27 height=%2764%27 rx=%2716%27 fill=%27url(%23g)%27/%3E%3Crect x=%2715%27 y=%2715%27 width=%2734%27 height=%2734%27 rx=%2710%27 fill=%27none%27 stroke=%27white%27 stroke-width=%274%27/%3E%3Ccircle cx=%2732%27 cy=%2732%27 r=%278%27 fill=%27none%27 stroke=%27white%27 stroke-width=%274%27/%3E%3Ccircle cx=%2743%27 cy=%2721%27 r=%273%27 fill=%27white%27/%3E%3C/svg%3E">');
   document.head.insertAdjacentHTML('beforeend', `<style>
     .tt-wheel{transition:transform 7.2s cubic-bezier(.12,.72,.08,1)!important}
@@ -266,4 +279,14 @@
     input.value = '';
     messages.scrollTop = messages.scrollHeight;
   };
+  if ('IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    const revealItems = document.querySelectorAll('main > section, .tt-spin, .tt-season-feature, .quick-reviews');
+    const revealObserver = new IntersectionObserver(entries => entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-visible');
+        revealObserver.unobserve(entry.target);
+      }
+    }), { threshold: .12 });
+    revealItems.forEach(item => { item.classList.add('tt-reveal'); revealObserver.observe(item); });
+  }
 })();
