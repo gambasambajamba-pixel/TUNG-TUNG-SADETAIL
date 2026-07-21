@@ -136,6 +136,7 @@
     const name = document.getElementById('monthlyName').value.trim();
     const contact = document.getElementById('monthlyContact').value.trim();
     const method = document.getElementById('monthlyMethod').value;
+    const choice = document.getElementById('monthlyChoice').value;
     const lastDetail = document.getElementById('monthlyLastDetail').value;
     const isEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(contact);
     const isPhone = contact.replace(/\D/g, '').length >= 10;
@@ -156,9 +157,9 @@
       city: '',
       address: '',
       distance: '',
-      travelRule: `Reminder preference: ${method}; opted in: yes; last detail: ${lastDetail}`
+      travelRule: `Monthly plan: ${choice}; reminder preference: ${method}; opted in: yes; last detail: ${lastDetail}`
     });
-    monthlyForm.innerHTML = `<div class="full" style="text-align:center;padding:20px 8px"><div class="eyebrow">You are on the list</div><h3 style="font:700 30px Playfair Display,serif;letter-spacing:-.04em;margin:12px 0;color:#071429">Monthly maintenance request saved.</h3><p style="font-size:13px;line-height:1.65;max-width:430px;margin:0 auto;color:#314766">Your ${method} preference and the 30-day target of ${dueDate} were sent to TungTungSADetail. Alex will confirm your $80 monthly-maintenance appointment.</p></div>`;
+    monthlyForm.innerHTML = `<div class="full" style="text-align:center;padding:20px 8px"><div class="eyebrow">You are on the list</div><h3 style="font:700 30px Playfair Display,serif;letter-spacing:-.04em;margin:12px 0;color:#071429">Monthly maintenance request saved.</h3><p style="font-size:13px;line-height:1.65;max-width:430px;margin:0 auto;color:#314766">Your choice to “${choice}” and ${method} preference were sent to TungTungSADetail. Alex will confirm the details and your 30-day target of ${dueDate}.</p></div>`;
   });
   const locationCheck = document.getElementById('locationCheck');
   if (locationCheck) locationCheck.addEventListener('click', () => {
