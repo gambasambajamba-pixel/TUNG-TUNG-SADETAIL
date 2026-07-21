@@ -122,6 +122,7 @@
   ];
   messages.firstElementChild.textContent = '🤖 ' + cheerfulGreetings[Math.floor(Math.random() * cheerfulGreetings.length)] + ' I’m Tung AI, Alex’s friendly detailing assistant! ✨';
   const bookingForm = document.getElementById('bookingForm');
+  const monthlyForm = document.getElementById('monthlyForm');
   const estimateCopy = document.querySelector('#estimate p');
   if (estimateCopy) estimateCopy.textContent = 'At 15 miles or farther, exterior-only and interior-only bookings are upgraded to the complete interior, exterior, and wet-vac package. Text a photo and location for a quote.';
   const aboutCopy = document.querySelector('#about p');
@@ -130,6 +131,35 @@
     const bookingButton = bookingForm.querySelector('button[type="submit"]');
     if (bookingButton) bookingButton.insertAdjacentHTML('beforebegin', '<div class="field"><label>Find your city</label><input id="travelZone" type="hidden"><button class="tt-range-btn" id="locationCheck" type="button">Use my phone location to find city</button></div><div class="field"><label for="serviceArea">City</label><input id="serviceArea" required autocomplete="address-level2" placeholder="Autofills from your location"></div><div class="field full"><label for="serviceAddress">Exact service address</label><input id="serviceAddress" required autocomplete="street-address" placeholder="Type the exact driveway or service address"><button class="tt-range-btn" id="addressCheck" type="button">Check this exact address</button></div><div class="field full"><div class="tt-distance" id="distanceNotice"><span class="tt-range-dot">15<br>mi</span><strong>Check your service range</strong><br>Use your phone location to find your city, then type the exact driveway or service address yourself. Your address is never shown publicly.</div></div>');
   }
+  if (monthlyForm) monthlyForm.addEventListener('submit', event => {
+    event.preventDefault();
+    const name = document.getElementById('monthlyName').value.trim();
+    const contact = document.getElementById('monthlyContact').value.trim();
+    const method = document.getElementById('monthlyMethod').value;
+    const lastDetail = document.getElementById('monthlyLastDetail').value;
+    const isEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(contact);
+    const isPhone = contact.replace(/\D/g, '').length >= 10;
+    if ((method === 'email' && !isEmail) || (method === 'text' && !isPhone)) {
+      alert(method === 'email' ? 'Please enter a valid email address for email reminders.' : 'Please enter a valid 10-digit mobile number for text reminders.');
+      return;
+    }
+    const reminderDate = new Date(lastDetail + 'T12:00:00');
+    reminderDate.setDate(reminderDate.getDate() + 30);
+    const dueDate = reminderDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+    saveToSheets({
+      type: 'booking',
+      service: 'Monthly Maintenance Reminder — $80 detail',
+      date: dueDate,
+      time: 'Monthly reminder',
+      name,
+      contact,
+      city: '',
+      address: '',
+      distance: '',
+      travelRule: `Reminder preference: ${method}; opted in: yes; last detail: ${lastDetail}`
+    });
+    monthlyForm.innerHTML = `<div class="full" style="text-align:center;padding:20px 8px"><div class="eyebrow">You are on the list</div><h3 style="font:700 30px Playfair Display,serif;letter-spacing:-.04em;margin:12px 0;color:#071429">Monthly maintenance request saved.</h3><p style="font-size:13px;line-height:1.65;max-width:430px;margin:0 auto;color:#314766">Your ${method} preference and the 30-day target of ${dueDate} were sent to TungTungSADetail. Alex will confirm your $80 monthly-maintenance appointment.</p></div>`;
+  });
   const locationCheck = document.getElementById('locationCheck');
   if (locationCheck) locationCheck.addEventListener('click', () => {
     const notice = document.getElementById('distanceNotice');
