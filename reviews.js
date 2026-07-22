@@ -48,7 +48,7 @@ if (reviewList) {
     document.getElementById('reviewAverage').textContent = average + ' ★';
     document.getElementById('reviewCount').textContent = list.length + (list.length === 1 ? ' customer review · 626 area' : ' customer reviews · 626 area');
     if (!list.length) return;
-    reviewList.innerHTML = list.map(item => '<article class="review-card"><div class="stars">' + '★'.repeat(Number(item.rating || 0)) + '</div><p>“' + escapeHtml(item.review) + '”</p>' + (item.photoUrl ? '<img loading="lazy" src="' + encodeURI(item.photoUrl) + '" alt="Customer car after its detail" style="width:100%;max-height:300px;object-fit:cover;margin:16px 0 0">' : '') + '<b>— ' + escapeHtml(item.name || 'Customer') + '</b></article>').join('');
+    reviewList.innerHTML = list.map(item => '<article class="review-card"><div class="stars">' + '★'.repeat(Number(item.rating || 0)) + '</div><p>“' + escapeHtml(item.review) + '”</p>' + (item.photoUrl ? '<img class="review-photo" loading="lazy" src="' + encodeURI(item.photoUrl) + '" alt="Customer car after its detail">' : '') + '<b>— ' + escapeHtml(item.name || 'Customer') + '</b></article>').join('');
   };
   const script = document.createElement('script');
   script.src = REVIEW_WEB_APP + '?action=reviews&callback=tungReviews';
